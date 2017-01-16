@@ -11,7 +11,7 @@ A Facebook App that is linked to the page.
 
 The Facebook App needs to be provided with a Webhook (Left Panel -> Webhooks). This webhook can be retrieved from the platform on which the app is deployed. For local use, the app can be run using "node app.js" and a webhook can be created using ngrok (./ngrok http [localhost port]). 
 
-Logging :
+# Logging
 
 Logging is done using the botmeter-logger package, with a Botmeter logging URL :
 
