@@ -13,13 +13,10 @@ var callSendAPI;
 
 var
   bodyParser = require('body-parser'),
-  config = require('config'),
-  crypto = require('crypto'),
   express = require('express'),
-  https = require('https'),
   request = require('request');
 
-// Including libraries for message logging 
+// Including libraries for message logging
 
 var botmeterApiUrl = 'http://botmeter-proxy-staging.herokuapp.com/';
 var botmeter = require('@botfuel/botmeter-logger')(botmeterApiUrl, process.env.BOTMETER_USER_KEY).facebook;

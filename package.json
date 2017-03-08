@@ -1,32 +1,15 @@
 {
-  "name": "@botfuel/test-bot-msngr",
-  "version": "1.0.0",
-  "description": "Get started example for Messenger Platform",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js",
-    "lint": "jslint --exclude node_modules '**/*.js'",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/fbsamples/messenger-platform-samples.git"
-  },
-  "author": "Facebook",
-  "license": "ISC",
-  "dependencies": {
-    "@botfuel/botmeter-logger": "latest",
-    "body-parser": "^1.15.0",
-    "botmetrics": "0.0.9",
-    "config": "^1.20.4",
-    "dashbot": "^0.8.2",
-    "ejs": "^2.4.2",
-    "express": "^4.13.4",
-    "jslint": "^0.10.3",
-    "request": "^2.72.0",
-    "wordhop": "^1.3.30"
-  },
-  "engines": {
-    "node": "~4.1.2"
-  }
+    "name": "sample-bot-messenger",
+    "version": "1.0.0",
+    "author": "sysadmin@botfuel.io",
+    "description": "A sample bot for the Messenger Platform",
+    "main": "app.js",
+    "scripts": {
+    },
+    "dependencies": {
+        "@botfuel/botmeter-logger": "latest",
+        "body-parser": "^1.15.0",
+        "express": "^4.13.4",
+        "request": "^2.72.0"
+    }
 }
