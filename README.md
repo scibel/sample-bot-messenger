@@ -4,17 +4,29 @@ This is an example of a Facebook Messenger bot in node.js, that will echo back a
 
 # Setup
 
-Requirements :
+Follow these steps to launch the bot example :
 
-A Facebook Page /
-A Facebook App that is linked to the page.
+* Clone the repository :
 
-The Facebook App needs to be provided with a Webhook (Left Panel -> Webhooks). This webhook can be retrieved from the platform on which the app is deployed. For local use, the app can be run using "node app.js" and a webhook can be created using ngrok (./ngrok http [localhost port]). 
+git clone https://github.com/Botfuel/sample-bot-messenger.git
 
-# Logging
+cd sample-bot-botbuilder
 
-Logging is done using the botmeter-logger package, with a Botmeter logging URL :
+npm install
 
-var botmeterLogger = require('@botfuel/botmeter-logger')(process.env.BOTMETER_URL).facebook;
+* Install ngrok and launch it :
 
-Due to the expected format of the messages (i.e. a docuemnt in the database contains both the user message and the bot response(s)), it is currently required that the user/bot messages be logged simultaneously with the botmeterLogger.logDocument(userMessage, botResponse, callback) function.
+npm install -g ngrok
+
+ngrok http 5000
+
+* Provide your Facebook app with the URL provided by ngrok + "/webhook"
+
+You can now launch the bot from the console :
+
+APP_SECRET=[[YOUR_APP_SECRET]] VALIDATION_TOKEN=[[YOUR_VALIDATION_SECRET]] PAGE_ACCESS_TOKEN=[[YOUR_PAGE_ACCESS]] USER_KEY=[[YOUR_USER_KEY]] node app.js
+
+(The APP_SECRET, VALIDATION_TOKEN and PAGE_ACCESS_TOKEN can be retrieve on the Facebook app page)
+
+You should now be able to message your bot from the Facebook Page that is linked to your App.
+
