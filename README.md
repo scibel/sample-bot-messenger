@@ -22,7 +22,7 @@ ngrok http 5000
 
 * Provide your Facebook app with the URL provided by ngrok + "/webhook"
 
-You can now launch the bot from the console :
+* You can now launch the bot from the console :
 
 APP_SECRET=[[YOUR_APP_SECRET]] VALIDATION_TOKEN=[[YOUR_VALIDATION_SECRET]] PAGE_ACCESS_TOKEN=[[YOUR_PAGE_ACCESS]] USER_KEY=[[YOUR_USER_KEY]] node app.js
 
