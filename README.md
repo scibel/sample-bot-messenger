@@ -20,7 +20,7 @@ Follow these steps to launch the bot example :
 
   * ngrok http 5000
 
-* Provide your Facebook app with the URL provided by ngrok + "/webhook"
+* Provide your Facebook app with the URL provided by ngrok + "/webhook" (ex : https://10573be9.ngrok.io)
 
 * You can now launch the bot from the console :
 
