@@ -2,14 +2,12 @@
 
 /*jslint unparam: true */
 
-require('dotenv').config();
-
 if (!(process.env.APP_SECRET && process.env.VALIDATION_TOKEN && process.env.PAGE_ACCESS_TOKEN)) {
   console.error("Missing config values");
   process.exit(1);
 }
 
-var receivedMessage, callSendAPI;
+var callSendAPI;
 
 // External Libraries
 
@@ -23,7 +21,8 @@ var
 
 // Including libraries for message logging 
 
-var botmeterLogger = require('@botfuel/botmeter-logger')(process.env.BOTMETER_URL).facebook;
+var botmeterApiUrl = 'http://botmeter-proxy-staging.herokuapp.com/';
+var botmeter = require('@botfuel/botmeter-logger')(botmeterApiUrl, process.env.BOTMETER_USER_KEY).facebook;
 
 // Defining ExpressJS app
 
@@ -55,7 +54,7 @@ app.post('/webhook', function (req, res) {
       // Iterate over each messaging event
       pageEntry.messaging.forEach(function (messagingEvent) {
         if (messagingEvent.message) {
-          receivedMessage(messagingEvent);
+          callSendAPI(messagingEvent.message.text);
         }
       });
     });
@@ -63,22 +62,7 @@ app.post('/webhook', function (req, res) {
   }
 });
 
-receivedMessage = function (event) {
-  var messageText = event.message.text;
-  if (messageText) {
-    var messageData = {
-      recipient: {
-        id: event.sender.id
-      },
-      message: {
-        text: messageText,
-      }
-    };
-    callSendAPI(messageData, messageText);
-  }
-};
-
-callSendAPI = function (messageData, originalRequest) {
+callSendAPI = function (originalRequest) {
   var requestData = {
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
