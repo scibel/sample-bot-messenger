@@ -10,7 +10,7 @@ var
   express = require('express'),
   request = require('request');
 
-var botmeterApiUrl = 'http://botmeter-proxy-staging.herokuapp.com/';
+var botmeterApiUrl = 'http://api.botmeter.io/';
 var botmeter = require('@botfuel/botmeter-logger')(botmeterApiUrl, process.env.BOTMETER_USER_KEY).facebook;
 
 var app = express();
