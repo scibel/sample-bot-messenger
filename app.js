@@ -1,17 +1,17 @@
 'use strict';
 
 var bodyParser = require('body-parser');
-var express = require('express'),
+var express = require('express');
 var request = require('request');
 var botmeterApiUrl = 'http://api.botmeter.io/';
-var botmeter = require('@botfuel/botmeter-logger')(botmeterApiUrl, process.env.BOTMETER_USER_KEY).facebook;
+var botmeter = require('@botfuel/botmeter-logger')(botmeterApiUrl, process.env.BOTMETER_USER_KEY).messenger;
 var app = express();
 app.set('port', process.env.PORT || 5000);
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.get('/webhook', function (req, res) {
-  if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === process.env.VALIDATION_TOKEN) {
+  if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === process.env.MESSENGER_VALIDATION_TOKEN) {
     console.log("Validating webhook");
     res.status(200).send(req.query['hub.challenge']);
   } else {
@@ -44,7 +44,7 @@ var callSendAPI = function (senderId, requestBody) {
   };
   var response = {
       uri: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
+      qs: { access_token: process.env.MESSENGER_PAGE_ACCESS_TOKEN },
       method: 'POST',
       json: responseJson
   };
