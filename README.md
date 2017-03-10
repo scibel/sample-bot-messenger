@@ -8,10 +8,10 @@ Follow these steps to launch the bot example :
 git clone https://github.com/Botfuel/sample-bot-messenger.git
 cd sample-bot-messenger
 npm install
-APP_SECRET=<YOUR_APP_SECRET> VALIDATION_TOKEN=<YOUR_VALIDATION_SECRET> PAGE_ACCESS_TOKEN=<YOUR_PAGE_ACCESS> BOTMETER_USER_KEY=<YOUR_USER_KEY> node app.js
+VALIDATION_TOKEN=<YOUR_VALIDATION_SECRET> PAGE_ACCESS_TOKEN=<YOUR_PAGE_ACCESS> BOTMETER_USER_KEY=<YOUR_USER_KEY> node app.js
 ```
 
-The APP_SECRET, VALIDATION_TOKEN and PAGE_ACCESS_TOKEN can be retrieved from the Facebook app page.
+The VALIDATION_TOKEN and PAGE_ACCESS_TOKEN can be retrieved from the Facebook app page.
 
 ## Test the bot
 
