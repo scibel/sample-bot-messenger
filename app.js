@@ -1,27 +1,17 @@
 'use strict';
 
-if (!(process.env.APP_SECRET && process.env.VALIDATION_TOKEN && process.env.PAGE_ACCESS_TOKEN)) {
-  console.error("Missing config values");
-  process.exit(1);
-}
-
-var
-  bodyParser = require('body-parser'),
-  express = require('express'),
-  request = require('request');
-
+var bodyParser = require('body-parser');
+var express = require('express'),
+var request = require('request');
 var botmeterApiUrl = 'http://api.botmeter.io/';
 var botmeter = require('@botfuel/botmeter-logger')(botmeterApiUrl, process.env.BOTMETER_USER_KEY).facebook;
-
 var app = express();
 app.set('port', process.env.PORT || 5000);
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-
 app.get('/webhook', function (req, res) {
-  if (req.query['hub.mode'] === 'subscribe' &&
-      req.query['hub.verify_token'] === process.env.VALIDATION_TOKEN) {
+  if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === process.env.VALIDATION_TOKEN) {
     console.log("Validating webhook");
     res.status(200).send(req.query['hub.challenge']);
   } else {
@@ -29,7 +19,6 @@ app.get('/webhook', function (req, res) {
     res.sendStatus(403);
   }
 });
-
 app.post('/webhook', function (req, res) {
   var data = req.body;
   if (data.object === 'page') {
@@ -44,8 +33,8 @@ app.post('/webhook', function (req, res) {
   }
 });
 
-var callSendAPI = function (senderId, originalRequest) {
-  var messageData = {
+var callSendAPI = function (senderId, requestBody) {
+  var responseJson = {
     recipient: {
       id: senderId
     },
@@ -53,19 +42,18 @@ var callSendAPI = function (senderId, originalRequest) {
       text: 'Hello World',
     }
   };
-  var requestData = {
-    uri: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
-    method: 'POST',
-    json: messageData
+  var response = {
+      uri: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
+      method: 'POST',
+      json: responseJson
   };
-
-  request(requestData, function (error, response, body) {
-    botmeter.logDocument(originalRequest, messageData, function (e, d) {
+  request(response, function (err, res, body) {
+    botmeter.logDocument(requestBody, responseJson, function (e, r) {
       if (e) {
         console.log('BOTMETER ERROR: ', e);
       } else {
-        console.log('BOTMETER LOGGING: ', d);
+        console.log('BOTMETER LOGGING: ', r);
       }
     });
   });
