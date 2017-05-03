@@ -1,55 +1,29 @@
-'use strict';
+const bodyParser = require('body-parser');
+const express = require('express');
+const request = require('request');
+const botmeterLogger = require('@botfuel/botmeter-logger');
 
-var bodyParser = require('body-parser');
-var express = require('express');
-var request = require('request');
-var botmeterApiUrl = 'http://api.botmeter.io/';
-var botmeter = require('@botfuel/botmeter-logger')(botmeterApiUrl, process.env.BOTMETER_USER_KEY).messenger;
-var app = express();
-app.set('port', process.env.PORT || 5000);
-app.use(bodyParser.json());
-app.use(express.static('public'));
+const botmeterApiUrl = 'http://api.botmeter.io/';
 
-app.get('/webhook', function (req, res) {
-  if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === process.env.MESSENGER_VALIDATION_TOKEN) {
-    console.log("Validating webhook");
-    res.status(200).send(req.query['hub.challenge']);
-  } else {
-    console.error("Failed validation. Make sure the validation tokens match.");
-    res.sendStatus(403);
-  }
-});
-app.post('/webhook', function (req, res) {
-  var data = req.body;
-  if (data.object === 'page') {
-    data.entry.forEach(function (pageEntry) {
-      pageEntry.messaging.forEach(function (messagingEvent) {
-        if (messagingEvent.message) {
-          callSendAPI(messagingEvent.sender.id, messagingEvent.message.text);
-        }
-      });
-    });
-    res.sendStatus(200);
-  }
-});
+const botmeter = botmeterLogger(botmeterApiUrl, process.env.BOTMETER_USER_KEY).messenger;
 
-var callSendAPI = function (senderId, requestBody) {
-  var responseJson = {
+const callSendAPI = (senderId, requestBody) => {
+  const responseJson = {
     recipient: {
-      id: senderId
+      id: senderId,
     },
     message: {
       text: 'Hello World',
-    }
+    },
   };
-  var response = {
-      uri: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: { access_token: process.env.MESSENGER_PAGE_ACCESS_TOKEN },
-      method: 'POST',
-      json: responseJson
+  const response = {
+    uri: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: { access_token: process.env.MESSENGER_PAGE_ACCESS_TOKEN },
+    method: 'POST',
+    json: responseJson,
   };
-  request(response, function (err, res, body) {
-    botmeter.logDocument(requestBody, responseJson, function (e, r) {
+  request(response, () => {
+    botmeter.logDocument(requestBody, responseJson, (e, r) => {
       if (e) {
         console.log('BOTMETER ERROR: ', e);
       } else {
@@ -59,7 +33,33 @@ var callSendAPI = function (senderId, requestBody) {
   });
 };
 
-app.listen(app.get('port'), function () {
+const app = express();
+app.set('port', process.env.PORT || 5000);
+app.use(bodyParser.json());
+app.use(express.static('public'));
+app.get('/webhook', (req, res) => {
+  if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === process.env.MESSENGER_VALIDATION_TOKEN) {
+    console.log('Validating webhook');
+    res.status(200).send(req.query['hub.challenge']);
+  } else {
+    console.error('Failed validation. Make sure the validation tokens match.');
+    res.sendStatus(403);
+  }
+});
+app.post('/webhook', (req, res) => {
+  const data = req.body;
+  if (data.object === 'page') {
+    data.entry.forEach((pageEntry) => {
+      pageEntry.messaging.forEach((messagingEvent) => {
+        if (messagingEvent.message) {
+          callSendAPI(messagingEvent.sender.id, messagingEvent.message.text);
+        }
+      });
+    });
+    res.sendStatus(200);
+  }
+});
+app.listen(app.get('port'), () => {
   console.log('Node app is running on port', app.get('port'));
 });
 
