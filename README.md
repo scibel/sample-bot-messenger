@@ -1,17 +1,22 @@
 # sample-bot-messenger
 
-This is an example of a Facebook Messenger bot in node.js, that will echo back any message sent by the user. Its primary use is to test message logging with the Botmeter analytics tool.
+This is an example of a Facebook Messenger bot in node.js. It always answers `Hello World`. Its primary use is to test message logging with the Botmeter analytics tool.
 
-## Run the bot locally
-Follow these steps to launch the bot example :
+## How to Run the bot locally
+Follow these steps to launch the bot:
 ```
 git clone https://github.com/Botfuel/sample-bot-messenger.git
 cd sample-bot-messenger
 npm install
+npm install -g ngrok
+ngrok http 5000
 MESSENGER_VALIDATION_TOKEN=<...> MESSENGER_PAGE_ACCESS_TOKEN=<...> BOTMETER_USER_KEY=<...> node app.js
 ```
-
-The MESSENGER_VALIDATION_TOKEN and MESSENGER_PAGE_ACCESS_TOKEN can be retrieved from the Facebook app page.
+Note:  
+In order to create the bot on Facebook's side follow this [tutorial](https://developers.facebook.com/docs/messenger-platform/guides/quick-start/).
+You have to generate a _Page Access Token_ from [Facebook for Developpers](https://developers.facebook.com/).
+You have to decide on the `MESSENGER_VALIDATION_TOKEN`'s value, and use it again when adding the webhook in Facebook for Developpers.
+The `BOTMETER_USER_KEY` comes from one of your bots in [BotMeter](https://dev.botmeter.io/).
 
 ## Test the bot
 
@@ -20,6 +25,6 @@ Install ngrok and launch it :
 npm install -g ngrok
 ngrok http 5000
 ```
-Provide your Facebook app with the URL provided by ngrok + "/webhook" (ex : https://10573be9.ngrok.io/webhook).
+Provide your Facebook app with the URL provided by ngrok + "/webhook" (eg. https://10573be9.ngrok.io/webhook).
 
 You should now be able to message your bot from the Facebook Page that is linked to your App.
