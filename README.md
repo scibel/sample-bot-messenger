@@ -14,8 +14,8 @@ MESSENGER_VALIDATION_TOKEN=<...> MESSENGER_PAGE_ACCESS_TOKEN=<...> BOTMETER_USER
 ```
 Note:  
 In order to create the bot on Facebook's side follow this [tutorial](https://developers.facebook.com/docs/messenger-platform/guides/quick-start/).  
-You have to decide on the `MESSENGER_VALIDATION_TOKEN`'s value, and use it for the webhook token in Facebook for Developpers.
-The url you will use for the webhook will be the one provided by ngrok. 
+You have to decide on the `MESSENGER_VALIDATION_TOKEN`'s value, and use it for the webhook token in Facebook for Developpers.  
+The url you will use for the webhook will be the one provided by ngrok.   
 The `BOTMETER_USER_KEY` comes from one of your bots in [BotMeter](https://dev.botmeter.io/).  
 
 ## Test the bot
