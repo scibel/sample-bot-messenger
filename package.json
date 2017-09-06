@@ -10,6 +10,7 @@
   "dependencies": {
     "@botfuel/botmeter-logger": "latest",
     "body-parser": "^1.15.0",
+    "botmeter-logger": "^1.9.3",
     "express": "^4.13.4",
     "request": "^2.72.0"
   },
