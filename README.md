@@ -11,17 +11,20 @@ npm install
 npm install -g ngrok
 ```
 
+ngrok is a is a command line tool that allows you to expose a localhost port to the internet through a secure tunnel. We use it for convenience here so you don’t have to host your bot on a server.
+
 ## How to run the bot on Facebook 
 Follow these steps to launch the bot on Facebook:
-  
+
 * In order to create the bot on Facebook's side follow this [tutorial](https://developers.facebook.com/docs/messenger-platform/guides/quick-start/).  
-* The`MESSENGER_VALIDATION_TOKEN` comes from Facebook for Developpers.
-* The `BOTMETER_USER_KEY` comes from one of your bots in [BotMeter](https://dev.botmeter.io/).  
+* The `MESSENGER_VALIDATION_TOKEN` and `MESSENGER_PAGE_ACCESS_TOKEN` come from Facebook for Developers.
+* The `APP_ID` and `APP_KEY` parameters comes from one of your apps on [Botfuel Developer Portal](https://app.botfuel.io/).
+
 * Run the following commands:  
 ```
 ngrok http 5000
-MESSENGER_VALIDATION_TOKEN=<...> MESSENGER_PAGE_ACCESS_TOKEN=<...> BOTMETER_USER_KEY=<...> node app.js
+MESSENGER_VALIDATION_TOKEN=<...> MESSENGER_PAGE_ACCESS_TOKEN=<...> APP_ID=<...> APP_KEY=<...> node app.js
 ```
-* You have to decide on the `MESSENGER_VALIDATION_TOKEN`'s value, and use it for the webhook token in Facebook for Developpers.  
+* You have to decide on the `MESSENGER_VALIDATION_TOKEN`'s value, and use it for the webhook token in Facebook for Developers.  
 * The url you will use for the webhook will be the one provided by ngrok.   
 
