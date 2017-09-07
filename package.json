@@ -8,7 +8,6 @@
     "style": "./node_modules/.bin/eslint app.js"
   },
   "dependencies": {
-    "@botfuel/botmeter-logger": "latest",
     "body-parser": "^1.15.0",
     "botmeter-logger": "^1.9.3",
     "express": "^4.13.4",

@@ -4,11 +4,11 @@ const BotmeterLogger = require('botmeter-logger');
 const request = require('request');
 
 const messengerLogger = new BotmeterLogger({
-  appId: '<APP_ID>',
-  appKey: '<APP_KEY>',
+  appId: process.env.APP_ID,
+  appKey: process.env.APP_KEY,
 }).messenger;
 
-// This sample code is mostly taken from
+// This code code is mostly taken from
 // developers.facebook.com/docs/messenger-platform/guides/quick-start/
 
 const callSendAPI = (senderId, requestBody) => {
@@ -29,7 +29,7 @@ const callSendAPI = (senderId, requestBody) => {
   };
 
   request(response, () => {
-    // Function that logs to Botmeter
+    // Function that logs into Botmeter
     messengerLogger.logDocument(requestBody, responseJson, (e, r) => {
       if (e) {
         console.log('BOTMETER ERROR: ', e);
