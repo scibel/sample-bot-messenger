@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "author": "sysadmin@botfuel.io",
   "description": "A sample bot for the Messenger Platform",
+  "license": "Apache-2.0",
   "main": "app.js",
   "scripts": {
     "style": "./node_modules/.bin/eslint app.js"
