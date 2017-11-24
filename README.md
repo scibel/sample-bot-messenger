@@ -28,3 +28,6 @@ MESSENGER_VALIDATION_TOKEN=<...> MESSENGER_PAGE_ACCESS_TOKEN=<...> APP_ID=<...> 
 * You have to decide on the `MESSENGER_VALIDATION_TOKEN`'s value, and use it for the webhook token in Facebook for Developers.  
 * The url you will use for the webhook will be the one provided by ngrok.   
 
+## License
+
+See the [LICENSE](LICENSE.md) file.
