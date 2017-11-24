@@ -1,7 +1,11 @@
 {
   "name": "sample-bot-messenger",
   "version": "1.0.0",
-  "author": "sysadmin@botfuel.io",
+  "author": {
+    "name": "Botfuel",
+    "email": "hi@botfuel.io",
+    "url": "https://www.botfuel.io"
+  },
   "description": "A sample bot for the Messenger Platform",
   "license": "Apache-2.0",
   "main": "app.js",
